@@ -1,8 +1,43 @@
 // 
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
-class HomeScreen extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:olshop/models/product_model.dart';
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+   List<Product> products = [];
+
+@override
+void initState() {
+  super.initState();
+  fetchProducts();
+
+}
+
+  Future<void> fetchProducts() async {
+    final response = await http.get(
+      Uri.parse('http://fakestoreapi.com/products')
+    );
+
+    debugPrint('Response: ${response.body}');
+
+    if (response.statusCode == 200) {
+      final List<dynamic> data = jsonDecode(response.body);
+      setState(() {
+        products = data.map((json) => Product.fromJson(json)).toList();
+      });
+    } else {
+      throw Exception('Gagal mengambil data produk');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +55,7 @@ class HomeScreen extends StatelessWidget {
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
           ),
+          // itemCount: products.length
           itemBuilder: (context, index) {
             return Card(
               elevation: 2,
