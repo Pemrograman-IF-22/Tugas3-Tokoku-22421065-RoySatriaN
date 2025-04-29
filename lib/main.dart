@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:olshop/screens/home_screen.dart';
 
 void main() {
-  runApp(MyWidget());
+  runApp(MyApp());
 }
 
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'iToko',
+      title: 'Tokoku',
       theme: ThemeData(
         appBarTheme: AppBarTheme(
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.blue,
           titleTextStyle: TextStyle(
             color: Colors.white,
             fontSize: 20,
@@ -21,26 +22,7 @@ class MyWidget extends StatelessWidget {
           )
         )
       ),
+      home: HomeScreen(),
     );
   }
 }
-// class MyApp extends StatelessWidget {
-//   const MyApp{(super.key)};
-
-//   @override
-//   Widget build(BuildContext context){
-//     return MaterialApp(
-//       title: 'iToko',
-//       theme: ThemeData(
-//         appBarTheme: AppBarTheme(
-//           backgroundColor: Colors.green,
-//           titleTextStyle: TextStyle(
-//             color: Colors.white,
-//             fontSize: 20,
-//             fontWeight: FontWeight.bold
-//           )
-//         )
-//       )
-//     )
-//   }
-// }
